@@ -1,0 +1,34 @@
+.nav-list li:not(:last-child){
+    margin-right: 10px;
+}
+
+.navbar{
+    box-shadow: 0 6px 14px #0000001a;
+    position: sticky !important;
+    top: 0;
+    background: #fff;
+    width: 100%;
+    z-index: 9999999;
+}
+
+.footer{
+    position: absolute;
+    bottom: 0;
+}
+
+.brightness{
+    filter: brightness(0.9);
+}
+
+.shop-now {
+    text-decoration: none;
+    background: #fff;
+    padding: 16px 48px;
+    border-radius: 10px;
+    color: rgb(76, 31, 89);
+}
+
+.semi-header{
+    font-size: 1.3rem;
+    font-weight: 500;
+}

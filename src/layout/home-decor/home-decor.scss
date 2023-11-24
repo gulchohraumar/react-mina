@@ -1,0 +1,27 @@
+.home-decor-container {
+    min-height: 100vh;
+    position: relative;
+}
+
+.background-image img,
+.background-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    z-index: 1;
+}
+
+.content {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    z-index: 2;
+    color: #fff;
+
+}
+
+.content h1 {
+    font-size: 6rem;
+}
