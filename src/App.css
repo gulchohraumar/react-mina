@@ -10,10 +10,38 @@
     width: 100%;
     z-index: 9999999;
 }
-
+/* 
 .footer{
     position: absolute;
     bottom: 0;
+} */
+
+.footer-con{
+    background-color: rgb(241, 241, 241);
+}
+
+.social-links a {
+    text-decoration: none;
+    color: #212529;
+}
+
+.footer-navigation a {
+    color: #212529;
+    font-size: 1.2rem;
+}
+
+.footer-navigation ul{
+    list-style: none;
+}
+
+.nav-item{
+    display: inline !important;
+    width: auto !important;
+    transition: 0.5s;
+}
+
+.nav-item:hover{
+    text-decoration: underline;
 }
 
 .brightness{
@@ -31,4 +59,8 @@
 .semi-header{
     font-size: 1.3rem;
     font-weight: 500;
+}
+
+.cursor{
+    cursor: pointer;
 }

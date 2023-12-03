@@ -1,0 +1,23 @@
+.title{
+    font-size: 4.5rem !important;
+}
+
+.sub-title{
+    font-size: 1.2rem;
+}
+
+.field label{
+    font-size: 1.1rem;
+}
+
+.email-signup{
+    font-size: 14px;
+    padding: 12px; 
+    outline: none;
+    border: none;
+    width: 100%;
+}
+
+.email-signup::placeholder{
+    color: rgb(146 146 146);
+}

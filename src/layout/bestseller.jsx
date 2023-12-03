@@ -42,7 +42,7 @@ export function BestSeller() {
                 {
                     itemArray.map((dt, key) => {
                         return (
-                            <a key={key} className="col-md-3 cursor-pointer" href='https://zyro.com/preview/mina?returnPath=%2Ftemplates'>
+                            <a key={key} className="col-md-3 cursor" href='https://zyro.com/preview/mina?returnPath=%2Ftemplates'>
                                 <div  >
                                 <div className="" style={{ position: 'relative' }}>
                                     <div className="product-image">

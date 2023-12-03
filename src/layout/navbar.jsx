@@ -1,4 +1,7 @@
-
+import { useState } from 'react';
+import Button from '@mui/material/Button';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
 
 export function Navbar() {
     const navArray = [
@@ -19,6 +22,15 @@ export function Navbar() {
             url: '/contact'
         },
     ]
+
+    const [anchorEl, setAnchorEl] = useState(null);
+    const open = Boolean(anchorEl);
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
     return <>
         <div className="row col-sm-12 px-2">
             <div className="col-md-2">
@@ -29,7 +41,10 @@ export function Navbar() {
                 <ul className="row justify-content-end align-items-center nav-list">
                     {
                         navArray.map((dt, key) => {
-                            return <li style={{ display: 'inline', width: 'auto' }} key={key}>{dt.name}</li>
+                            return <li className="cursor nav-item" key={key}>
+                                {dt.name}
+                                {key == 0 ? <svg data-v-cf3ff533="" class="ms-2 item-content__icon" width="10" height="7" viewBox="0 0 10 7" fill="none" xmlns="http://www.w3.org/2000/svg"><path data-v-cf3ff533="" d="M5 6.5L0.669873 0.5L9.33013 0.500001L5 6.5Z" fill="currentColor"></path></svg> : ''}
+                            </li>
                         })
                     }
 

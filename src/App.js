@@ -2,6 +2,7 @@ import './App.css';
 import { Layout } from './layout/layout';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Navbar } from './layout/navbar';
+import Footer from './layout/footer';
 
 function App() {
   return (
@@ -23,7 +24,7 @@ function App() {
       </section>
 
       <section className='footer'>
-        Footer
+        <Footer/>
       </section>
  
     </div>
