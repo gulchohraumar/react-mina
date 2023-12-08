@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 export function Navbar() {
     const navArray = [
@@ -31,10 +32,15 @@ export function Navbar() {
     const handleClose = () => {
         setAnchorEl(null);
     };
+
+    function handleNavigate(){
+        // navigate('/');
+        <Navigate to="/" replace={true} state={{ from: '' }} />;
+    }
     return <>
         <div className="row col-sm-12 px-2">
             <div className="col-md-2">
-                <img height={20} width={70} data-v-237d5d94="" className="ms-3 block-header-logo__image" src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=128,fit=crop,q=95/minattnvs/MINA-Yg2GZekJLlIEw2GR.png" data-qa="builder-siteheader-img-logo" />
+                <img onClick={() => handleNavigate()} height={20} width={70} data-v-237d5d94="" className="ms-3 block-header-logo__image cursor" src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=128,fit=crop,q=95/minattnvs/MINA-Yg2GZekJLlIEw2GR.png" data-qa="builder-siteheader-img-logo" />
             </div>
 
             <div className="col-md-10">
@@ -43,7 +49,7 @@ export function Navbar() {
                         navArray.map((dt, key) => {
                             return <li className="cursor nav-item" key={key}>
                                 {dt.name}
-                                {key == 0 ? <svg data-v-cf3ff533="" class="ms-2 item-content__icon" width="10" height="7" viewBox="0 0 10 7" fill="none" xmlns="http://www.w3.org/2000/svg"><path data-v-cf3ff533="" d="M5 6.5L0.669873 0.5L9.33013 0.500001L5 6.5Z" fill="currentColor"></path></svg> : ''}
+                                {key == 0 ? <svg data-v-cf3ff533="" className="ms-2 item-content__icon" width="10" height="7" viewBox="0 0 10 7" fill="none" xmlns="http://www.w3.org/2000/svg"><path data-v-cf3ff533="" d="M5 6.5L0.669873 0.5L9.33013 0.500001L5 6.5Z" fill="currentColor"></path></svg> : ''}
                             </li>
                         })
                     }

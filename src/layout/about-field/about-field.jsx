@@ -17,10 +17,11 @@ export default function AboutField() {
             url: ''
         },
     ]
+
     return <>
         <div className='py-5 about-field-container'>
             <div className="row px-5">
-                {
+                { 
                     fieldArray.map((dt, key) => {
                         return <div key={key} className="col-md-6 about-field-item">
                             <div className="col-md-12 about-img">

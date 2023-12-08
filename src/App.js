@@ -3,6 +3,7 @@ import { Layout } from './layout/layout';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Navbar } from './layout/navbar';
 import Footer from './layout/footer';
+import SellItem from './sell-item/sell-item';
 
 function App() {
   return (
@@ -15,18 +16,15 @@ function App() {
         <Router>
           <Routes>
             <Route path='/' element={<Layout />}> </Route>
-            {/* <Route path='/main' element={<Public />}>
-            <Route path='order' element={<Order />}> </Route>
-            <Route path='order/add' element={<NewOrder />}> </Route>
-          </Route> */}
+            <Route path='/item/:id' element={<SellItem />}></Route>
           </Routes>
         </Router>
       </section>
 
       <section className='footer'>
-        <Footer/>
+        <Footer />
       </section>
- 
+
     </div>
   );
 }
