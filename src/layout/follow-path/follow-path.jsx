@@ -26,7 +26,7 @@ export default function FollowPath() {
     ]
     return <>
         <div className='bestSellers mt-5 '>
-            <h1 className='p-4 text-center'>
+            <h1 className='p-4 text-center font-size-3'>
                 Follow us on Instagram
             </h1>
 

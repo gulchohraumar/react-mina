@@ -8,12 +8,12 @@ export function Header() {
             Free shipping on orders over $50 amount
         </div>
 
-        <div className='header-logo-con bg-warning'>
+        <div className='header-logo-con'>
             <img className='header-logo' src={bgHeader} alt="" />
         </div>
 
         <div className='header-content m-auto text-center'>
-            <h1>
+            <h1 className='font-size-6'>
                 Handmade ceramics
             </h1>
 

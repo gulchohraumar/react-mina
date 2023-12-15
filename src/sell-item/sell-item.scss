@@ -1,6 +1,23 @@
-.im{
+.img {
     z-index: 99999;
     position: relative;
-    width: 300px;
-    height: 300px;
+    width: 100%;
+}
+
+.bestSellers h1 {
+    font-size: 3rem;
+}
+
+.color-list{
+    padding: 10px;
+    border: 1px solid #cdcdcd;
+}
+
+.counter-buttons button{
+    cursor: pointer;
+    width: 45px;
+    height: 45px;
+    outline: none;
+    background: #fff;
+    border: 1px solid #dbd8d8;
 }

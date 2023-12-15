@@ -32,7 +32,7 @@ export default function AboutField() {
                             </div>
                             <p className='field-description'>{dt.description}</p>
                             <div className="mt-5">
-                                <span onClick={() => {navigate('/')}} className='cursor shop-now learn-more'>Learn more</span>
+                                <span onClick={() => {navigate('/')}} className='cursor shop-now bg-purple-btn'>Learn more</span>
                             </div>
                         </div>
                     })
