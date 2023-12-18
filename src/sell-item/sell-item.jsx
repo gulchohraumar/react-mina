@@ -4,8 +4,8 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useEffect, useState } from 'react';
 
 export default function SellItem() {
-    const data = useSelector((state) => state.sellItem);
-    const [itemCount, setItemCount] = useState(1);
+    const data = useSelector((state) => state);
+    const [itemCount, setItemCount] = useState(1); 
 
     function handleDecrement() {
         itemCount > 1 ? setItemCount(itemCount - 1) : setItemCount(1);
@@ -13,6 +13,10 @@ export default function SellItem() {
 
     function handleIncrement() {
         setItemCount(itemCount + 1);
+    }
+
+    function handleAddBag() {
+        console.log('add')
     }
 
     useEffect(() => {
@@ -63,7 +67,7 @@ export default function SellItem() {
                         </p>
 
                         <div className="mt-5">
-                            <span className='cursor shop-now bg-purple-btn'>Add to bag</span>
+                            <button onClick={handleAddBag} disabled={data.status == 3} className='cursor shop-now bg-purple-btn disabled'>Add to bag</button>
                         </div>
 
                         <div className='my-5 py-4' style={{ fontSize: '1.1rem' }}>

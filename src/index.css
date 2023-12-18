@@ -29,4 +29,11 @@
 .bg-purple-btn{
     color: #fff !important;
     background-color: rgb(76, 31, 89) !important;
+    outline: none;
+    border: none;
+}
+
+.disabled:disabled{
+  opacity: 0.6;
+  cursor: default;
 }

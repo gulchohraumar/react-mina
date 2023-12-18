@@ -8,19 +8,32 @@ export function Navbar() {
     const navArray = [
         {
             name: 'Shop',
-            url: '/shop'
+            url: '',
+            subUrls: [
+                {
+                    name: 'All products',
+                    url: '/all',
+                },
+                {
+                    name: 'New collection',
+                    url: '/new-collection',
+                },
+            ]
         },
         {
             name: 'Sustainability',
-            url: '/sustainability'
+            url: '/sustainability',
+            subUrls: []
         },
         {
             name: 'About',
-            url: '/about'
+            url: '/about',
+            subUrls: []
         },
         {
             name: 'Contact',
-            url: '/contact'
+            url: '/contact',
+            subUrls: []
         },
     ]
 
@@ -33,9 +46,10 @@ export function Navbar() {
         setAnchorEl(null);
     };
 
-    function handleNavigate(){
+    function handleNavigate() {
         // navigate('/');
-        <Navigate to="/" replace={true} state={{ from: '' }} />;
+        // <Navigate to="/" replace={true} state={{ from: '' }} />;
+        console.log(navArray)
     }
     return <>
         <div className="row col-sm-12 px-2">
@@ -48,8 +62,21 @@ export function Navbar() {
                     {
                         navArray.map((dt, key) => {
                             return <li className="cursor nav-item" key={key}>
-                                {dt.name}
-                                {key == 0 ? <svg data-v-cf3ff533="" className="ms-2 item-content__icon" width="10" height="7" viewBox="0 0 10 7" fill="none" xmlns="http://www.w3.org/2000/svg"><path data-v-cf3ff533="" d="M5 6.5L0.669873 0.5L9.33013 0.500001L5 6.5Z" fill="currentColor"></path></svg> : ''}
+                                <label className={"cursor " + (dt.subUrls?.length ? 'subMenu-label' : '')}>
+                                    {dt.name}
+                                    {dt.subUrls?.length ? <svg data-v-cf3ff533="" className="ms-2 item-content__icon" width="10" height="7" viewBox="0 0 10 7" fill="none" xmlns="http://www.w3.org/2000/svg"><path data-v-cf3ff533="" d="M5 6.5L0.669873 0.5L9.33013 0.500001L5 6.5Z" fill="currentColor"></path></svg> : ''}
+
+                                    {dt.subUrls?.length ? <div className='nav-menu navMenuAnimation'>
+                                        <ul className=''>
+                                            {
+                                                dt?.subUrls?.map((subDt, subKey) => {
+                                                    return <li className='mb-2' key={subKey}>{subDt.name}</li>
+                                                })
+                                            }
+                                        </ul>
+                                    </div>
+                                        : ''}
+                                </label>
                             </li>
                         })
                     }
@@ -71,6 +98,7 @@ export function Navbar() {
                         </svg>
                         Cart (0)
                     </li>
+
                 </ul>
             </div>
         </div>
