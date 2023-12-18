@@ -3,6 +3,8 @@ import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { Navigate, useNavigate } from 'react-router-dom';
+import { Link } from "react-router-dom";
+import logo from '../assets/img1.avif'
 
 export function Navbar() {
     const navArray = [
@@ -46,11 +48,11 @@ export function Navbar() {
         setAnchorEl(null);
     };
 
+    const navigate = useNavigate();
     function handleNavigate() {
-        // navigate('/');
-        // <Navigate to="/" replace={true} state={{ from: '' }} />;
-        console.log(navArray)
+        navigate('/');
     }
+
     return <>
         <div className="row col-sm-12 px-2">
             <div className="col-md-2">
@@ -70,7 +72,7 @@ export function Navbar() {
                                         <ul className=''>
                                             {
                                                 dt?.subUrls?.map((subDt, subKey) => {
-                                                    return <li className='mb-2' key={subKey}>{subDt.name}</li>
+                                                    return <li className='mb-2 ' key={subKey}><label className='cursor'>{subDt.name}</label></li>
                                                 })
                                             }
                                         </ul>
@@ -81,7 +83,7 @@ export function Navbar() {
                         })
                     }
 
-                    <li style={{ display: 'inline', width: 'auto' }}>
+                    <li className='cursor' style={{ display: 'inline', width: 'auto' }}>
                         <svg data-v-da7f12ed="" width="19" height="24" viewBox="0 0 19 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="mb-1 me-2 block-header-cart__icon"><path data-v-da7f12ed="" fillRule="evenodd" clipRule="evenodd" d="M5.94636 5.35922C6.29451 3.00506 7.9363 1.39824 9.67973
 						1.39824C11.4232 1.39824 13.0649 3.00506
 						13.4131 5.35922H5.94636ZM4.53847 5.35922C4.90317 2.43147
@@ -101,6 +103,20 @@ export function Navbar() {
 
                 </ul>
             </div>
+        </div>
+
+        <div className="side-nav">
+            <div className="p-3 d-flex justify-content-end">
+                <svg className='cursor' data-v-2f9813ef="" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path data-v-2f9813ef="" d="M12 4L4 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path data-v-2f9813ef="" d="M4 4L12 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path></svg>
+            </div>
+
+            <ul className="card-list bg-danger">
+                <li className='d-flex'>
+                    <div className="col-sm-2 text-center bg-warning">
+                        <img width={50} height={50} src={logo} alt="" />
+                    </div>
+                </li>
+            </ul>
         </div>
     </>
 }

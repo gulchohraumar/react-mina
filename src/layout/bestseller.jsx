@@ -124,8 +124,8 @@ export function BestSeller() {
                 {
                     itemArray.map((dt, key) => {
                         return (
-                            <span onClick={() => handleOpenItem(dt)}  key={key} className="col-md-3 cursor" >
-                                <div>
+                            <span onClick={() => handleOpenItem(dt)}  key={key} className="col-md-3 " >
+                                <div className='cursor'>
                                     <div className="" style={{ position: 'relative' }}>
                                         <div className="product-image">
                                             <img className='col-sm-12' src={dt.url} alt="" />

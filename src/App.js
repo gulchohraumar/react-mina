@@ -8,22 +8,23 @@ import SellItem from './sell-item/sell-item';
 function App() {
   return (
     <div className="common-container">
-      <section className='navbar px-4 py-3'>
-        <Navbar />
-      </section>
+      <Router>
+        <section className='navbar px-4 py-3'>
+          <Navbar />
+        </section>
 
-      <section className='main'>
-        <Router>
+        <section className='main'>
           <Routes>
             <Route path='/' element={<Layout />}> </Route>
             <Route path='/item/:id' element={<SellItem />}></Route>
           </Routes>
-        </Router>
-      </section>
 
-      <section className='footer'>
-        <Footer />
-      </section>
+        </section>
+
+        <section className='footer'>
+          <Footer />
+        </section>
+      </Router>
 
     </div>
   );
