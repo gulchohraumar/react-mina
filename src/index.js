@@ -7,7 +7,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import { Provider } from 'react-redux';
 import allReducers from './store-slices/all-reducers';
-import { createStore } from 'redux'
+import { createStore, combineReducers  } from 'redux'
 import { persistReducer, persistStore } from 'redux-persist';
 import storage from 'redux-persist/lib/storage'
 import sellItem from './store-slices/sell-item';
@@ -20,12 +20,12 @@ const persistConfig = {
   storage,
 }
 
-const persistedReducer = persistReducer(persistConfig, sellItem)
+const persistedReducer = persistReducer(persistConfig, allReducers)
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const store = createStore(persistedReducer)
-const persistor = persistStore(store)
-
+const persistor = persistStore(store);
+ 
 root.render(
   <Provider store={store}>
     <PersistGate loading={null} persistor={persistor}>

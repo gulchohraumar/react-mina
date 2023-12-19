@@ -1,10 +1,14 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { Link } from "react-router-dom";
 import logo from '../assets/img1.avif'
+import { width } from '@mui/system';
+import { useSelector, useDispatch } from 'react-redux'
+import { setBagListData } from '../store-slices/bag-list';
+
 
 export function Navbar() {
     const navArray = [
@@ -39,13 +43,32 @@ export function Navbar() {
         },
     ]
 
-    const [anchorEl, setAnchorEl] = useState(null);
-    const open = Boolean(anchorEl);
-    const handleClick = (event) => {
-        setAnchorEl(event.currentTarget);
+    const [sideNavState, setSideNavState] = useState(null);
+    const [sideNavList, setSideNavList] = useState([]);
+    const dispatch = useDispatch();
+    const data = useSelector((state) => state);
+
+    useEffect(() => {
+        console.log(data)
+    }, [])
+
+    const handleOpenBag = () => {
+        setSideNavState(true);
+        setSideNavList(data.bagList.dataList)
     };
-    const handleClose = () => {
-        setAnchorEl(null);
+
+    const handleCloseBag = () => {
+        setSideNavState(false);
+    };
+
+    const handleDeleteItem = (index) => {
+        console.log(index)
+        let arr = [...data.bagList.dataList]
+        arr.splice(index,1);
+        console.log(arr)
+        dispatch(setBagListData({ dataList: arr }));
+        console.log(data.bagList.dataList)
+        // setSideNavList(data.bagList.dataList)
     };
 
     const navigate = useNavigate();
@@ -83,7 +106,7 @@ export function Navbar() {
                         })
                     }
 
-                    <li className='cursor' style={{ display: 'inline', width: 'auto' }}>
+                    <li onClick={handleOpenBag} className='cursor' style={{ display: 'inline', width: 'auto' }}>
                         <svg data-v-da7f12ed="" width="19" height="24" viewBox="0 0 19 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="mb-1 me-2 block-header-cart__icon"><path data-v-da7f12ed="" fillRule="evenodd" clipRule="evenodd" d="M5.94636 5.35922C6.29451 3.00506 7.9363 1.39824 9.67973
 						1.39824C11.4232 1.39824 13.0649 3.00506
 						13.4131 5.35922H5.94636ZM4.53847 5.35922C4.90317 2.43147
@@ -105,18 +128,47 @@ export function Navbar() {
             </div>
         </div>
 
-        <div className="side-nav">
+        <div className={'side-nav' + (sideNavState === true ? ' open-sidenav' : '') + (sideNavState === false ? ' close-sidenav' : '')}>
             <div className="p-3 d-flex justify-content-end">
-                <svg className='cursor' data-v-2f9813ef="" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path data-v-2f9813ef="" d="M12 4L4 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path data-v-2f9813ef="" d="M4 4L12 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path></svg>
+                <svg onClick={handleCloseBag} className='cursor' data-v-2f9813ef="" width="18" height="18" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path data-v-2f9813ef="" d="M12 4L4 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path data-v-2f9813ef="" d="M4 4L12 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path></svg>
             </div>
 
-            <ul className="card-list bg-danger">
-                <li className='d-flex'>
-                    <div className="col-sm-2 text-center bg-warning">
-                        <img width={50} height={50} src={logo} alt="" />
-                    </div>
-                </li>
-            </ul>
+            <div className={'side-list-content' + (sideNavList.length ? '' : ' d-flex align-items-center justify-content-center')}>
+                {
+                    sideNavList.length ? <ul className="card-list">
+                        {
+                            sideNavList.map((dt, key) => {
+                                return <li key={key} className='d-flex py-2'>
+                                    <div className="col-sm-3 mx-2 text-center">
+                                        <img src={dt.url} alt="" />
+                                    </div>
+                                    <div className="col-sm-7 d-flex flex-column">
+                                        <div className='me-3 item-header' >
+                                            {dt.name}
+                                        </div>
+                                        <div className='mt-2'>
+                                            <span className='text-danger'> Quantity:</span>  {dt.itemCount}
+                                            <span className='ms-2 text-danger'> Price:</span>  {dt.status == 2 ? (<span><span style={{ textDecoration: 'line-through', color: '#999999' }}>{dt.price}</span> {dt.updatePrice}</span>) : dt.updatePrice}
+                                        </div>
+                                    </div>
+
+                                    <div className="text-end text-danger col-sm-1 ">
+                                        <svg onClick={() => handleDeleteItem(key)} xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" className="mt-2 cursor bi bi-trash" viewBox="0 0 16 16">
+                                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z" />
+                                            <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z" />
+                                        </svg>
+                                    </div>
+                                </li>
+                            })
+                        }
+                    </ul>
+                        :
+                        <p className='empty-list' >
+                            Shopping bag is empty
+                        </p>
+                }
+
+            </div>
         </div>
     </>
 }

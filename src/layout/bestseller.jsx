@@ -1,7 +1,9 @@
 import { useNavigate } from 'react-router-dom';
 import './bestseller.scss'
 import { useSelector, useDispatch } from 'react-redux'
-import { setData } from '../store-slices/sell-item';
+import { setDataSellItem } from '../store-slices/sell-item';
+import { useEffect } from 'react';
+import { setBagListData } from '../store-slices/bag-list';
 
 export function BestSeller() {
     const navigate = useNavigate(); 
@@ -108,9 +110,13 @@ export function BestSeller() {
  
     function handleOpenItem(dt){
         console.log(dt);
-        dispatch(setData(dt))
+        dispatch(setDataSellItem(dt))
         navigate(`/item/${dt.id}`, { state: dt});
     }
+
+    // useEffect(() => {
+    //     dispatch(setBagListData({ dataList: [] }))
+    // }, [])
 
     
 

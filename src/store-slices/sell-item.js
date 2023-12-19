@@ -12,7 +12,7 @@ export const sellItemSlice = createSlice({
         status: 0,
     },
     reducers: {
-        setData: (state, payload) => {
+        setDataSellItem: (state, payload) => {
             state.id = payload.payload.id
             state.name = payload.payload.name;
             state.url = payload.payload.url
@@ -30,6 +30,6 @@ export const sellItemSlice = createSlice({
     }
 })
 
-export const { setData } = sellItemSlice.actions
+export const { setDataSellItem } = sellItemSlice.actions
 
 export default sellItemSlice.reducer

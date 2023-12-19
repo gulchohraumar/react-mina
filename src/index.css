@@ -41,7 +41,7 @@
 
   .side-nav {
     position: absolute;
-    right: 0;
+    right: -32%;
     top: 0;
     width: 30%;
     height: 100vh;
@@ -57,10 +57,56 @@
   .card-list li{
     position: relative;
     border-bottom: 1px solid #dedede;
-    /* padding: 10px ; */
     display: flex;
-    height: 50px;
-    max-height: 50px;
+    height: auto;
+    font-size: 15px;
   }
 
-  .open-sidenav {}
+  .card-list img{
+    width: 90%;
+  }
+
+  .card-list .item-header{
+    font-size: 20px;
+  }
+
+  .close-sidenav {
+    right: -32%;
+    animation: closeSideNav 1s linear;
+  }
+
+  @keyframes closeSideNav{
+    from{
+      right: 0%;
+    }
+
+    to{
+      right: -32%;
+    }
+  }
+
+  .open-sidenav {
+    right: 0%;
+    animation: openSideNav 1s linear;
+  }
+
+  @keyframes openSideNav{
+    from{
+      right: -32%;
+    }
+
+    to{
+      right: 0%;
+    }
+  }
+
+  .side-list-content{
+    height: -webkit-fill-available;
+  }
+
+  .empty-list{
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 1.45;
+    color: #1d1e20;
+  }
