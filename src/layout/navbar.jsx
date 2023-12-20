@@ -8,7 +8,8 @@ import logo from '../assets/img1.avif'
 import { width } from '@mui/system';
 import { useSelector, useDispatch } from 'react-redux'
 import { setBagListData } from '../store-slices/bag-list';
-
+import { store } from '..';
+import watch from 'redux-watch'
 
 export function Navbar() {
     const navArray = [
@@ -45,16 +46,24 @@ export function Navbar() {
 
     const [sideNavState, setSideNavState] = useState(null);
     const [sideNavList, setSideNavList] = useState([]);
+    const [bagListCount, setBagListCount] = useState(0);
     const dispatch = useDispatch();
     const data = useSelector((state) => state);
 
+    let w = watch(store.getState, 'bagList.dataList')
+    store.subscribe(w((newval, oldval, objectpath) => {
+        setSideNavList(newval);
+        setBagListCount(newval?.length)
+    }))
+
     useEffect(() => {
-        console.log(data)
+        console.log(data.bagList.dataList)
+        setSideNavList(data.bagList.dataList);
+        setBagListCount(data.bagList.dataList?.length)
     }, [])
 
     const handleOpenBag = () => {
         setSideNavState(true);
-        setSideNavList(data.bagList.dataList)
     };
 
     const handleCloseBag = () => {
@@ -62,13 +71,9 @@ export function Navbar() {
     };
 
     const handleDeleteItem = (index) => {
-        console.log(index)
         let arr = [...data.bagList.dataList]
-        arr.splice(index,1);
-        console.log(arr)
+        arr.splice(index, 1);
         dispatch(setBagListData({ dataList: arr }));
-        console.log(data.bagList.dataList)
-        // setSideNavList(data.bagList.dataList)
     };
 
     const navigate = useNavigate();
@@ -121,7 +126,7 @@ export function Navbar() {
 						9.47359 14.9239 9.08752V6.75728H17.2816V21.2039C17.2816 21.976 16.6557 22.6019
 						15.8836 22.6019H3.4758C2.70368 22.6019 2.07775 21.976 2.07775 21.2039V6.75728Z" fill="currentColor"></path>
                         </svg>
-                        Cart (0)
+                        Cart ({bagListCount})
                     </li>
 
                 </ul>

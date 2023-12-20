@@ -23,7 +23,7 @@ const persistConfig = {
 const persistedReducer = persistReducer(persistConfig, allReducers)
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-const store = createStore(persistedReducer)
+export const store = createStore(persistedReducer)
 const persistor = persistStore(store);
  
 root.render(
