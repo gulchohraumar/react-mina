@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Navbar } from './layout/navbar';
 import Footer from './layout/footer';
 import SellItem from './sell-item/sell-item';
+import SustainabilityAbout from './sustainability-about/sustainability-about';
 
 function App() {
   return (
@@ -16,6 +17,8 @@ function App() {
         <section className='main'>
           <Routes>
             <Route path='/' element={<Layout />}> </Route>
+            <Route path='/sustainability' element={<SustainabilityAbout />}> </Route>
+            <Route path='/about' element={<SustainabilityAbout />}> </Route>
             <Route path='/item/:id' element={<SellItem />}></Route>
           </Routes>
 

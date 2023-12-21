@@ -30,7 +30,7 @@ export default function AboutField() {
                             <div className="mt-4 about-content">
                                 <h2>{dt.name}</h2>
                             </div>
-                            <p className='field-description'>{dt.description}</p>
+                            <p className='semi-color-content'>{dt.description}</p>
                             <div className="mt-5">
                                 <span onClick={() => {navigate('/')}} className='cursor shop-now bg-purple-btn'>Learn more</span>
                             </div>

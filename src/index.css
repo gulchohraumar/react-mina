@@ -41,7 +41,7 @@
 
   .side-nav {
     position: absolute;
-    right: -42%;
+    right: -410px;
     top: 0;
     width: 410px;
     height: 100vh;
@@ -71,7 +71,7 @@
   }
 
   .close-sidenav {
-    right: -42%;
+    right: -410px;
     animation: closeSideNav 1s linear;
   }
 
@@ -81,7 +81,7 @@
     }
 
     to{
-      right: -42%;
+      right: -410px;
     }
   }
 
@@ -92,7 +92,7 @@
 
   @keyframes openSideNav{
     from{
-      right: -42%;
+      right: -410px;
     }
 
     to{

@@ -10,10 +10,13 @@ import { useSelector, useDispatch } from 'react-redux'
 import { setBagListData } from '../store-slices/bag-list';
 import { store } from '..';
 import watch from 'redux-watch'
+import { setNavigation } from '../store-slices/navigation';
+import { setSustainabilityAbout } from '../store-slices/sustainability-about-slice';
 
 export function Navbar() {
     const navArray = [
         {
+            id: 1,
             name: 'Shop',
             url: '',
             subUrls: [
@@ -28,16 +31,19 @@ export function Navbar() {
             ]
         },
         {
+            id: 2,
             name: 'Sustainability',
             url: '/sustainability',
             subUrls: []
         },
         {
+            id: 3,
             name: 'About',
             url: '/about',
             subUrls: []
         },
         {
+            id: 4,
             name: 'Contact',
             url: '/contact',
             subUrls: []
@@ -48,19 +54,18 @@ export function Navbar() {
     const [sideNavList, setSideNavList] = useState([]);
     const [bagListCount, setBagListCount] = useState(0);
     const dispatch = useDispatch();
-    const data = useSelector((state) => state);
+    const data = useSelector((state) => state.bagList.dataList);
 
     let w = watch(store.getState, 'bagList.dataList')
     store.subscribe(w((newval, oldval, objectpath) => {
         setSideNavList(newval);
-        setBagListCount(newval?.length)
+        setBagListCount(newval?.length);
     }))
 
     useEffect(() => {
-        console.log(data.bagList.dataList)
-        setSideNavList(data.bagList.dataList);
-        setBagListCount(data.bagList.dataList?.length)
-    }, [])
+        setSideNavList(data);
+        setBagListCount(data?.length);
+    }, []);
 
     const handleOpenBag = () => {
         setSideNavState(true);
@@ -71,29 +76,61 @@ export function Navbar() {
     };
 
     const handleDeleteItem = (index) => {
-        let arr = [...data.bagList.dataList]
+        let arr = [...data]
         arr.splice(index, 1);
         dispatch(setBagListData({ dataList: arr }));
     };
 
+
+    const sustanability = {
+        name: 'Sustainability',
+        urlString: require('../assets/page-header-content/sustainabilty.avif'),
+        description: 'We care about our planet. For this reason, Mina aims to be operating sustainably and ethically at every level.',
+        firstRowImgUrl: require('../assets/sustan-about/sustan-ethnos.avif'),
+        firstRowTitle: 'Working Ethos',
+        firstRowDesc: 'For Alex and Laura, planning ahead is a central component of sustainable design. Work begins with sketches of ideas before any clay is modeled. Fully conceptualizing and refining each design beforehand helps us to reduce material waste.',
+        firstRowSemiDesc: 'We strive to work collaboratively at every stage. Our team efforts minimize energy usage in the studio.',
+
+        secondRowImgUrl: require('../assets/sustan-about/sustan-material.avif'),
+        secondRowTitle: 'Materials',
+        secondRowDesc: "Surrounded by beautiful landscapes, it is only right that our studio is stocked with only the finest local materials that haven't had to travel far to get to us. Our clay is as locally sourced as possible for every product.",
+        secondRowSemiDesc: 'We ensure that the paint we use on our products is low-VOC and never washed into local waterways during production.',
+    }
+
+    const about = {
+        name: 'About Mina',
+        urlString: require('../assets/page-header-content/about.avif'),
+        description: 'Mina is a brand born out of love for ceramics, vivid colours and passion for life.',
+        firstRowImgUrl: require('../assets/sustan-about/about-girls.avif'),
+        firstRowTitle: 'Alex & Laura',
+        firstRowDesc: 'For Alex and Laura, planning ahead is a central component of sustainable design. Work begins with sketches of ideas before any clay is modeled. Fully conceptualizing and refining each design beforehand helps us to reduce material waste.',
+        firstRowSemiDesc: 'We strive to work collaboratively at every stage. Our team efforts minimize energy usage in the studio.',
+
+        secondRowImgUrl: require('../assets/sustan-about/about-sustanability.avif'),
+        secondRowTitle: 'Materials',
+        secondRowDesc: "Two creative minds that came together at art school, Alex and Laura founded Mina with a shared passion for design and sustainability. For them, success is more than just about having a bestselling product.",
+        secondRowSemiDesc: 'Every piece in our store has been created with love by Alex and Laura. They take inspiration from the world around them when it comes to shapes, colors, and the clay that they work with.',
+    }
+
     const navigate = useNavigate();
-    function handleNavigate() {
-        navigate('/');
+    function handleNavigate(url, id) {
+        navigate(url);
+        dispatch(setNavigation({ id: id }));
+        id == 2 ? dispatch(setSustainabilityAbout(sustanability)) : (id == 3 ? dispatch(setSustainabilityAbout(about)) : navigate(url));
     }
 
     return <>
         <div className="row col-sm-12 px-2">
             <div className="col-md-2">
-                <img onClick={() => handleNavigate()} height={20} width={70} data-v-237d5d94="" className="ms-3 block-header-logo__image cursor" src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=128,fit=crop,q=95/minattnvs/MINA-Yg2GZekJLlIEw2GR.png" data-qa="builder-siteheader-img-logo" />
+                <img onClick={() => handleNavigate('/', 0)} height={20} width={70} data-v-237d5d94="" className="ms-3 block-header-logo__image cursor" src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=128,fit=crop,q=95/minattnvs/MINA-Yg2GZekJLlIEw2GR.png" data-qa="builder-siteheader-img-logo" />
             </div>
-
             <div className="col-md-10">
                 <ul className="row justify-content-end align-items-center nav-list">
                     {
                         navArray.map((dt, key) => {
                             return <li className="cursor nav-item" key={key}>
                                 <label className={"cursor " + (dt.subUrls?.length ? 'subMenu-label' : '')}>
-                                    {dt.name}
+                                    <span onClick={() => handleNavigate(dt.url, dt.id)} >{dt.name}</span>
                                     {dt.subUrls?.length ? <svg data-v-cf3ff533="" className="ms-2 item-content__icon" width="10" height="7" viewBox="0 0 10 7" fill="none" xmlns="http://www.w3.org/2000/svg"><path data-v-cf3ff533="" d="M5 6.5L0.669873 0.5L9.33013 0.500001L5 6.5Z" fill="currentColor"></path></svg> : ''}
 
                                     {dt.subUrls?.length ? <div className='nav-menu navMenuAnimation'>
