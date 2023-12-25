@@ -2,11 +2,12 @@ import './sell-item.scss'
 import { useSelector, useDispatch } from 'react-redux'
 import { useEffect, useState } from 'react';
 import { setBagListData } from '../store-slices/bag-list';
+import success from '../utils/utils';
 
 export default function SellItem() {
     const data = useSelector((state) => state);
     const [itemCount, setItemCount] = useState(1);
-
+ 
     function handleDecrement() {
         itemCount > 1 ? setItemCount(itemCount - 1) : setItemCount(1);
     }
@@ -29,7 +30,8 @@ export default function SellItem() {
         };
 
         let arr = [...data.bagList.dataList, model];
-        dispatch(setBagListData({ dataList: arr }))
+        dispatch(setBagListData({ dataList: arr }));
+        success();
     }
 
   
@@ -41,7 +43,7 @@ export default function SellItem() {
                     <img className='img' src={data.sellItem.url} alt="" />
                 </div>
                 <div className="col-md-6 d-flex align-items-center px-5">
-                    <div className="">
+                    <div className=""> 
                         <h1 className='font-size-3'>{data.sellItem.name}</h1>
                         <p className='font-size-1-3 my-4'>
                             {
@@ -89,7 +91,7 @@ export default function SellItem() {
                     </div>
 
                 </div>
-            </div>
+            </div> 
         </div>
     </>
 }

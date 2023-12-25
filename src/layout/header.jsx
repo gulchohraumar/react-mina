@@ -1,8 +1,10 @@
 
-import bgHeader from '../assets/bg-header.png'
-import './header.scss'
+import { useContext } from 'react';
+import bgHeader from '../assets/bg-header.png';
+import './header.scss';
 
 export function Header() {
+    
     return <div style={{ position: 'relative', height: '100vh' }}>
         <div className='free-shipping-text py-3 text-center'>
             Free shipping on orders over $50 amount
@@ -22,7 +24,7 @@ export function Header() {
             </p>
 
             <div className="mt-5">
-                <a className='shop-now' href="">Shop now</a>
+                <span className='shop-now' href="">Shop now</span>
             </div>
         </div>
     </div>

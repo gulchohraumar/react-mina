@@ -12,8 +12,12 @@ import { store } from '..';
 import watch from 'redux-watch'
 import { setNavigation } from '../store-slices/navigation';
 import { setSustainabilityAbout } from '../store-slices/sustainability-about-slice';
+import { useContext } from 'react'
+import { TestContext } from '../App';
+import success from '../utils/utils';
 
 export function Navbar() {
+
     const navArray = [
         {
             id: 1,
@@ -79,6 +83,7 @@ export function Navbar() {
         let arr = [...data]
         arr.splice(index, 1);
         dispatch(setBagListData({ dataList: arr }));
+        success();
     };
 
 
@@ -116,7 +121,7 @@ export function Navbar() {
     function handleNavigate(url, id) {
         navigate(url);
         dispatch(setNavigation({ id: id }));
-        id == 2 ? dispatch(setSustainabilityAbout(sustanability)) : (id == 3 ? dispatch(setSustainabilityAbout(about)) : navigate(url));
+        id == 2 ? dispatch(setSustainabilityAbout(sustanability)) : (id == 3 ? dispatch(setSustainabilityAbout(about)) : dispatch(setSustainabilityAbout({})));
     }
 
     return <>

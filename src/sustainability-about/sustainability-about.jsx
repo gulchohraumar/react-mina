@@ -1,17 +1,16 @@
 import PageHeaderContent from "../pages-header-content/page-header-content";
 import { useEffect, useState } from "react";
 import { store } from "..";
-import watch from 'redux-watch'
-import { useSelector, useDispatch } from 'react-redux'
+import watch from 'redux-watch';
+import { useSelector, useDispatch } from 'react-redux';
 
 export default function SustainabilityAbout() {
     const [aboutSustainability, setAboutSustainability] = useState({});
     const data = useSelector((state) => state.sustainabilityAbout);
-    
+
     let w = watch(store.getState, 'sustainabilityAbout')
     store.subscribe(w((newval, oldval, objectpath) => {
         setAboutSustainability(newval);
-        console.log(data);
     }));
 
     return <>

@@ -20,6 +20,7 @@
     "redux-persist": "^6.0.0",
     "redux-watch": "^1.2.0",
     "sass": "^1.69.5",
+    "sweetalert2": "^11.10.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
