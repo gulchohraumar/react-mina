@@ -1,14 +1,12 @@
 import { useNavigate } from 'react-router-dom';
 import './bestseller.scss'
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { setDataSellItem } from '../store-slices/sell-item';
-import { useEffect } from 'react';
-import { setBagListData } from '../store-slices/bag-list';
 
 export function BestSeller() {
-    const navigate = useNavigate(); 
+    const navigate = useNavigate();
     const dispatch = useDispatch();
-
+ 
     let itemArray = [
         {
             id: 1,
@@ -24,15 +22,15 @@ export function BestSeller() {
             colors: [
                 {
                     id: 1,
-                    value: 'Yellow'
+                    value: 'Yellow',
                 },
                 {
                     id: 2,
-                    value: 'Blue'
+                    value: 'Blue',
                 },
                 {
                     id: 3,
-                    value: 'White'
+                    value: 'White',
                 },
             ],
             color: 'Yellow, Blue or White',
@@ -107,53 +105,43 @@ export function BestSeller() {
             measurement: '15x10 cm',
         },
     ]
- 
-    function handleOpenItem(dt){
+
+    function handleOpenItem(dt) {
         console.log(dt);
-        dispatch(setDataSellItem(dt))
-        navigate(`/item/${dt.id}`, { state: dt});
+        dispatch(setDataSellItem(dt));
+        navigate(`/item/${dt.id}`, { state: dt });
     }
 
-    // useEffect(() => {
-    //     dispatch(setBagListData({ dataList: [] }))
-    // }, [])
-
-    
-
-    return <> 
+    return <>
         <div className='bestSellers'>
             <h1 className='p-5 text-center font-size-3'>
                 Our bestsellers
             </h1>
-
             <div className="row py-4 px-5 main-bestseller">
                 {
                     itemArray.map((dt, key) => {
                         return (
-                            <span onClick={() => handleOpenItem(dt)}  key={key} className="col-md-3 " >
+                            <span onClick={() => handleOpenItem(dt)} key={key} className="col-md-3 animation-objects">
                                 <div className='cursor'>
                                     <div className="" style={{ position: 'relative' }}>
                                         <div className="product-image">
                                             <img className='col-sm-12' src={dt.url} alt="" />
                                         </div>
-
                                         {
-                                            dt.status == 2 ? (<div className='product-sale'> Sale </div>) : null
+                                            dt.status === 2 ? (<div className='product-sale'> Sale </div>) : null
                                         }
                                     </div>
-
                                     <div className='bestseller-content'>
                                         <h3 className='text-center mt-3'>{dt.name}</h3>
-
                                         <p className='text-center'>
                                             {
-                                                dt.status == 2 ? (<span className='price me-2' style={{ textDecoration: 'line-through', color: '#999999' }}>{dt.price}</span>) : null
+                                                dt.status === 2 ? (<span className='price me-2' style={{ textDecoration: 'line-through', color: '#999999' }}>{dt.price}</span>) : null
                                             }
                                             {
-                                                dt.status == 3 ? (<span style={{ color: '#999999' }}>OUT OF STOCK</span>) : null
+                                                dt.status === 3 ? (<span style={{ color: '#999999' }}>OUT OF STOCK</span>) : null
                                             }
                                             {
-                                                (dt.status == 1 || dt.status == 2) ? (<span className='price'>{dt.updatePrice}</span>) : null
+                                                (dt.status === 1 || dt.status === 2) ? (<span className='price'>{dt.updatePrice}</span>) : null
                                             }
                                         </p>
                                     </div>
@@ -162,21 +150,7 @@ export function BestSeller() {
                         )
                     })
                 }
-
-
-
-                {/* <div className="col-md-3">
-                    <div className="bg-danger">
-                        <img className='col-sm-12' src={img1} alt="" />
-                    </div>
-                </div>
-                <div className="col-md-3">
-                    <div className="bg-danger">
-                        <img className='col-sm-12' src={img1} alt="" />
-                    </div>
-                </div> */}
             </div>
-
         </div>
     </>
-}
+} 

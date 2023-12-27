@@ -5,13 +5,22 @@ import { Navbar } from './layout/navbar';
 import Footer from './layout/footer';
 import SellItem from './sell-item/sell-item';
 import SustainabilityAbout from './sustainability-about/sustainability-about';
-import { createContext, useState } from 'react';
+import { createContext, useState, useEffect} from 'react';
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 export const TestContext = createContext();
 
 function App() {
   const [text, setText] = useState('');
   
+  useEffect(() => {
+    AOS.init({
+      easing: 'ease-out-quad',
+      duration: 1000,
+    });
+  }, []);
+
   return (
     <div className="common-container" >
       <TestContext.Provider value={{text, setText}}>

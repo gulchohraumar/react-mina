@@ -119,3 +119,18 @@
     grid-template-columns: auto minmax(0, 1fr) auto;
     z-index: 999999 !important;
 }
+
+.animation-objects {
+  animation: fadeIn 0.4s linear ;  
+}
+
+@keyframes fadeIn{
+    0%{
+        transform: translateY(15px);
+        opacity: 0;
+    }
+    100%{
+        transform: translateY(0px);
+        opacity: 1;
+    }
+}
